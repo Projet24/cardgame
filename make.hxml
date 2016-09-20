@@ -1,7 +1,6 @@
 # // make.hxml
 -lib hxnodejs
 -lib js-kit
--lib haxelow
 -main com.p24studio.cardgame.test.NodeMain
 -js server.js
 -D

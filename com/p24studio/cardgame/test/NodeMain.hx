@@ -14,20 +14,56 @@ import js.npm.Express;
 import js.npm.express.*;
 import js.Node.console;
 
+
 import com.p24studio.cardgame.main.domain.*;
 import com.p24studio.cardgame.main.service.*;
 
 import com.p24studio.cardgame.main.constants.Rules;
 
+
+
+@:jsRequire("fs")
+extern class FS {
+    static function readFileSync(path:String, encoding:String):String;
+    static function existsSync(path:String):Bool;
+}
+
+
+
+@:jsRequire("sqlite3", "Database")
+extern class Database {
+    function new(file:String);
+    function serialize(request:Dynamic):Dynamic;
+    function run(request:Dynamic):Dynamic;
+    function prepare(request:Dynamic):Dynamic;
+    function each(request:Dynamic, action:Dynamic):Dynamic;
+}
+
 class NodeMain {
     private var PORT = 1337;
 
-    function new()
-    {
+    function new() {
         var app    = new js.npm.Express();
         var server = js.node.Http.createServer( cast app );
         var io     = new js.npm.socketio.Server(server); // sockets
-        var db = new HaxeLow('db.json'); // Database
+
+        var exists = FS.existsSync("sqlite.db");
+
+        var db = new Database("sqlite.db");
+
+        db.serialize(function() {
+          if(!exists) {
+            db.run("CREATE TABLE Stuff (thing TEXT)");
+          }
+          var preparedQuery = db.prepare("INSERT INTO Stuff VALUES (?)");
+          preparedQuery.run("test");
+          preparedQuery.finalize();
+
+          db.each("SELECT rowid AS id, thing FROM Stuff", function(err, row) {
+            console.log(row.id + ": " + row.thing);
+          });
+        });
+
 
         //demoDatabase(db);
 
@@ -48,8 +84,7 @@ class NodeMain {
         server.listen(PORT);
     }
 
-    static public function main()
-    {
+    static public function main() {
         var main = new NodeMain();
     }
 
