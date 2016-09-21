@@ -1,6 +1,7 @@
 # // make.hxml
 -lib hxnodejs
 -lib js-kit
+-lib thx.promise
 -main com.p24studio.cardgame.test.NodeMain
 -js server.js
 -D

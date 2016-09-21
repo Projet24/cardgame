@@ -7,11 +7,15 @@ import js.npm.Express;
 import js.npm.express.*;
 import js.Node.console;
 
+using thx.promise.Promise;
+import thx.Error;
+import thx.Result;
+
 import com.p24studio.cardgame.main.domain.*;
 import com.p24studio.cardgame.main.service.*;
 
 import com.p24studio.cardgame.main.constants.Rules;
-
+using Lambda;
 @:jsRequire("fs") // TODO: delete this. Replace it with the native haxe file lib
 extern class FS {
     static function existsSync(path:String):Bool;
@@ -64,12 +68,11 @@ class NodeMain {
       /** TEST DATABASE */
       var exists = FS.existsSync("sqlite.db"); // TODO put the db name in config file
 
-      db.serialize(function() {
-        CardTypeDAO.addCardType(db, "Pikeman", 3, 1);
+      CardTypeDAO.addCardType(db, "Lord", 7, 10);
 
-        var cardTypes = CardTypeDAO.findAll(db);
+      CardTypeDAO.findAll(db).success(function(cardTypes: List<CardType>) {
         for (ct in cardTypes) {
-          trace (ct);
+          trace(ct);
         }
       });
     }
