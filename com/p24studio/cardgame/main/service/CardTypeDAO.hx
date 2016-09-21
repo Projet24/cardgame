@@ -2,7 +2,7 @@ package com.p24studio.cardgame.main.service;
 
 import com.p24studio.cardgame.main.domain.CardType;
 
-class CardTypeFactory { // TODO refactor: rename it CardTypeDAO
+class CardTypeDAO { // TODO refactor: rename it CardTypeDAO
   public static function addCardType(db, name:String, attack:Int, healthPoints:Int) {
     db.serialize(function() {
       var preparedQuery = db.prepare("INSERT INTO CardType(name, attack, healthPoints) VALUES (?,?,?)");

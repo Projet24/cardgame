@@ -49,7 +49,7 @@ class NodeMain {
         var main = new NodeMain();
     }
 
-    static function demoDatabase(db:Database) {
+    static function initializeDatabase(db:Database) {
       /** TEST DATABASE */
       var exists = FS.existsSync("sqlite.db"); // TODO put the db name in config file
 
@@ -57,9 +57,17 @@ class NodeMain {
         if (!exists) {
           db.run("CREATE TABLE CardType (name TEXT, attack INTEGER, healthPoints INTEGER)");
         }
-        CardTypeFactory.addCardType(db, "Pikeman", 3, 1);
+      });
+    }
 
-        var cardTypes = CardTypeFactory.findAll(db);
+    static function demoDatabase(db:Database) {
+      /** TEST DATABASE */
+      var exists = FS.existsSync("sqlite.db"); // TODO put the db name in config file
+
+      db.serialize(function() {
+        CardTypeDAO.addCardType(db, "Pikeman", 3, 1);
+
+        var cardTypes = CardTypeDAO.findAll(db);
         for (ct in cardTypes) {
           trace (ct);
         }
