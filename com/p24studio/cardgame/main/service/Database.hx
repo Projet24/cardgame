@@ -1,10 +1,5 @@
 package com.p24studio.cardgame.main.service;
 
-/*@:jsRequire("sqlite3", "Statement")
-extern class Statement {
-  function run(?params:List<Dynamic>):Void;
-  function finalize():Void;
-}*/
 
 @:jsRequire("sqlite3", "Database")
 extern class Database {
