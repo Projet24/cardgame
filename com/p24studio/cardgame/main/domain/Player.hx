@@ -3,7 +3,7 @@ package com.p24studio.cardgame.main.domain;
 import haxe.ds.Vector;
 import com.p24studio.cardgame.main.constants.Rules;
 
-class Player {
+class Player { // TODO rename this Commander (Player in-game)
 	var name:String;
 	var healthPoints:Int;
     var hand:Vector<Card>;
@@ -18,7 +18,7 @@ class Player {
 
     public function draw() {
         var card = deck.pop();
-        // TODO: if hand is not full 
+        // TODO: if hand is not full
         // TODO: get first available index
         hand[0] = card;
     }
