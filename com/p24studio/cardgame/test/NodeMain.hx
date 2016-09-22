@@ -30,6 +30,7 @@ class NodeMain {
         var io = new js.npm.socketio.Server(server); // sockets
         var db = new Database("sqlite.db"); // TODO put the db name in config file
 
+        initializeDatabase(db);
         demoDatabase(db);
 
 
@@ -60,6 +61,11 @@ class NodeMain {
       db.serialize(function() {
         if (!exists) {
           db.run("CREATE TABLE CardType (name TEXT, attack INTEGER, healthPoints INTEGER)");
+          CardTypeDAO.addCardType(db, "Gobelin", 1, 1);
+          CardTypeDAO.addCardType(db, "Knight", 1, 2);
+          CardTypeDAO.addCardType(db, "Hobgobelin", 2, 1);
+          CardTypeDAO.addCardType(db, "Pikemen", 3, 1);
+          CardTypeDAO.addCardType(db, "Lord", 7, 10);
         }
       });
     }
@@ -68,7 +74,7 @@ class NodeMain {
       /** TEST DATABASE */
       var exists = FS.existsSync("sqlite.db"); // TODO put the db name in config file
 
-      CardTypeDAO.addCardType(db, "Lord", 7, 10);
+      CardTypeDAO.addCardType(db, "KusthomGobelin", 1, 1);
 
       CardTypeDAO.findAll(db).success(function(cardTypes: List<CardType>) {
         for (ct in cardTypes) {
