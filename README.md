@@ -27,7 +27,7 @@ CardGame
 
 * Install Haxe libs
 	* haxelib install hxnodejs
-	* haxelib install haxelow
+	* haxelib install thx.promise
 	* haxelib git js-kit https://github.com/clemos/haxe-js-kit.git haxelib
 
 # Run Guide
