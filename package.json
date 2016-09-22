@@ -8,6 +8,7 @@
     "express": "^4.14.0",
     "fs": "0.0.1-security",
     "socket.io": "^1.4.8",
+    "sqlite3": "^3.1.4",
     "steno": "^0.4.4"
   },
   "devDependencies": {},

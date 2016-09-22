@@ -74,7 +74,7 @@ class NodeMain {
       /** TEST DATABASE */
       var exists = FS.existsSync("sqlite.db"); // TODO put the db name in config file
 
-      CardTypeDAO.addCardType(db, "KusthomGobelin", 1, 1);
+      //CardTypeDAO.addCardType(db, "KusthomGobelin", 1, 1);
 
       CardTypeDAO.findAll(db).success(function(cardTypes: List<CardType>) {
         for (ct in cardTypes) {
