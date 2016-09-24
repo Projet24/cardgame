@@ -22,7 +22,7 @@ extern class FS {
 }
 
 class NodeMain {
-    private var PORT = 1337;
+    private var PORT = 8089;
 
     function new() {
         var app = new js.npm.Express();
